@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class TicTacToeProgram {
 
+    public static char[] board;
+
     //creating board
     public static char[] creatingBoard() {
         char[] board = new char[10];
@@ -18,6 +20,7 @@ public class TicTacToeProgram {
     public static char userSymbol() {
         char computerInput = 'O';
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the character X or O");
         char userInput = scanner.next().charAt(0);
         if (userInput == computerInput) {
             System.out.println("Player choose computer input ");
@@ -28,10 +31,23 @@ public class TicTacToeProgram {
         return userInput;
     }
 
+    //creating board
+    public static char[] displayBoard() {
+        int initially = 1;
+        for (int i = initially; i <= board.length - initially; i++) {
+            System.out.println(board[i] + " | " + board[i + 1] + " | " + board[i + 2]);
+            initially = initially + 3;
+        }
+        return board;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Welcome Tic Tac Toe program ");
-        creatingBoard();
+        board = creatingBoard();
         userSymbol();
+        displayBoard();
+
     }
 }
 
