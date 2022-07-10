@@ -57,10 +57,21 @@ public class TicTacToeProgram {
         Integer[] positionOfCells = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int userRequiredPosition = scanner.nextInt();
 
-        if (Arrays.asList(positionOfCells).contains(userRequiredPosition)) {
+        if (Arrays.asList(positionOfCells).contains(userRequiredPosition) && checkPositionEmpty(userRequiredPosition)) {
             board[userRequiredPosition] = player;
             displayBoard();
         }
+    }
+
+    //checking whether the position of cell is empty or not
+    public static boolean checkPositionEmpty(int requiredPosition) {
+        if (board[requiredPosition] == ' ') {
+            return true;
+        } else {
+            System.out.println("The position you entered is already filled.Please select the position which is empty ");
+            playerTurn();
+        }
+        return false;
     }
 
     public static void main(String[] args) {
