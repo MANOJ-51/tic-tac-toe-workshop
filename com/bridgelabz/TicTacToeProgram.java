@@ -1,52 +1,74 @@
 package com.bridgelabz;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TicTacToeProgram {
 
-    public static char[] board;
+    public static char[] board = new char[10];
+    public static char player;
+    public static char computer;
 
-    //creating board
-    public static char[] creatingBoard() {
-        char[] board = new char[10];
-        //zero is ignores for user friendly
+    //creating an empty board with space
+    public static void makeEmptyBoard() {
         for (int i = 1; i < board.length; i++) {
             board[i] = ' ';
         }
-        return board;
     }
 
-    //using letter x,0 to input
-    public static char userSymbol() {
-        char computerInput = 'O';
+    //asking player to select x / o
+    public static void playerSelection() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the character X or O");
-        char userInput = scanner.next().charAt(0);
-        if (userInput == computerInput) {
-            System.out.println("Player choose computer input ");
-        } else if (userInput != computerInput) {
-            computerInput = 'O';
-            System.out.println("player chosed" + computerInput);
+        System.out.println("Enter the symbol to choose X/O ");
+        String userChoice = scanner.next();
+        switch (userChoice) {
+            case "X":
+                player = 'X';
+                computer = 'O';
+                System.out.println("The player entered option is  " + player);
+                break;
+            case "O":
+                player = 'O';
+                computer = 'X';
+                System.out.println("The player entered option is " + player);
+                break;
+            default:
+                System.out.println("Please enter a valid choice");
+                break;
         }
-        return userInput;
     }
 
-    //creating board
-    public static char[] displayBoard() {
-        int initially = 1;
-        for (int i = initially; i <= board.length - initially; i++) {
-            System.out.println(board[i] + " | " + board[i + 1] + " | " + board[i + 2]);
-            initially = initially + 3;
-        }
-        return board;
+    //display board
+    public static void displayBoard() {
+        System.out.println("Currently the board looks like following ");
+        System.out.println("");
+
+        System.out.println(board[1] + " | " + board[2] + " | " + board[3]);
+        System.out.println(board[4] + " | " + board[5] + " | " + board[6]);
+        System.out.println(board[7] + " | " + board[8] + " | " + board[9]);
+        System.out.println("");
     }
 
+    //player turn
+    public static void playerTurn() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter the position where you want to make a move (1-9):");
+
+        Integer[] positionOfCells = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int userRequiredPosition = scanner.nextInt();
+
+        if (Arrays.asList(positionOfCells).contains(userRequiredPosition)) {
+            board[userRequiredPosition] = player;
+            displayBoard();
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("Welcome Tic Tac Toe program ");
-        board = creatingBoard();
-        userSymbol();
+        makeEmptyBoard();
+        playerSelection();
         displayBoard();
+        playerTurn();
 
     }
 }
